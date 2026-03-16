@@ -1,0 +1,129 @@
+= Guide -- Work Log
+
+== Overview
+
+A unified plain-text note-taking system for capturing decisions, meetings, observations, and status updates.
+Designed for real-time capture and later reflection, with minimal friction and a programmer's aesthetic.
+
+== Template
+
+....
+timestamp: [YYYY-MM-DD HH:MM]
+title: [Title]
+type: [TYPE]
+---
+context: [Why this matters]
+insight: [What was decided, what happened, or what you observed]
+rationale: [Reasoning or alternatives considered]
+impact: [Who or what is affected, next steps]
+tags: [#person-tag #project-tag]
+....
+
+== Types
+
+DECISION:: High-level strategies or decisions not captured elsewhere
+DISCUSSION:: Notes on discussions with key points
+OBSERVATION:: Notes on interesting insights about dynamics and processes
+STATUS:: Progress updates on projects and tasks
+
+== Tips for Consistency
+
+=== Real-time capture
+* Keep the work log open during your day
+* Write entries immediately after decisions or meetings -- even just timestamp and type, fill details later
+* Use your editor's search to find entries quickly
+
+=== End-of-day ritual
+* Spend five minutes reviewing what happened
+* Add any entries you missed
+* Scan for patterns or recurring themes
+
+=== Searching and reviewing
+Use plain-text search (grep, editor search, or command line):
+
+[source,bash]
+----
+grep "type: DECISION" notes | grep architecture
+grep "#team" notes
+grep "type: OBSERVATION" notes | grep morale
+----
+
+=== Keep a tag vocabulary
+* Technical: `#architecture`, `#technical-debt`, `#process`, `#reliability`
+* People: `#team`, `#person-[name]`, `#growth`, `#morale`, `#communication`
+* Work: `#project-[name]`, `#hiring`, `#blocker`, `#progress`
+
+== Examples
+
+=== Decision
+
+Technical or organizational choices, with rationale and impact.
+Includes architectural decisions, process changes, hiring decisions, resource allocation, etc.
+
+....
+timestamp: 2026-03-13 14:30
+title: Migrate authentication service to event-driven architecture
+type: DECISION
+---
+context: Current synchronous approach causing race conditions in distributed deployments
+insight: Adopt event-driven pattern with message queue
+rationale:
+    Decouples services, improves resilience.
+    Alternative: distributed locks (more complex, slower).
+    Considered async/await but team skill gap.
+impact: 3-week spike, requires devops setup, affects onboarding service integration
+tags: #architecture #project-authentication-service #technical-debt
+....
+
+=== Discussion
+
+Notes on discussions that capture critical points and varying perspectives.
+
+....
+timestamp: 2026-03-13 10:00
+title: One-on-one with Alex
+type: DISCUSSION
+---
+context: Quarterly planning for direct report
+insight:
+    Alex wants to grow into system design; discussed Q2 projects.
+    Agreed to lead refactoring of payment module as growth opportunity.
+rationale: Aligns with career goals, module is high-priority, good learning opportunity
+impact: Unblocks two other projects, need to schedule pairing sessions
+tags: #person-alex #growth #project-payment-module
+....
+
+=== Observation
+Things you notice about team dynamics, process inefficiencies, technical insights, or individual strengths.
+These are lighter than decisions but worth capturing for later reflection and pattern-spotting.
+
+....
+timestamp: 2026-03-11 16:45
+title: Team morale dip after missed deadline
+type: OBSERVATION
+---
+context: Feature slipped by two weeks
+insight:
+    Three people mentioned frustration in standup; one person went quiet in retro.
+    Visible impact on team energy.
+rationale: Tied to the missed commitment we made; need to rebuild trust
+impact: Schedule one-on-ones this week to check in individually
+tags: #team #morale #communication
+....
+
+=== Status
+Quick progress snapshots on projects, initiatives, or work streams.
+
+....
+timestamp: 2026-03-13 17:00
+title: Payment module refactor
+type: STATUS
+---
+context: Alex leading refactor; started this week
+insight:
+    30% complete, initial architecture review done.
+    Pair sessions with senior engineer going well; no blockers yet.
+rationale: On track for three-week timeline
+impact: Continue current pace, monitor for blockers
+tags: #project-payment-module #person-alex #progress
+....
